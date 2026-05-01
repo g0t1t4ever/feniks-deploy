@@ -3,8 +3,6 @@
    style.css
    ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;900&display=swap');
-
 @font-face {
   font-family: 'TT Norms Pro';
   src: url('../fonts/TTNormsPro-Bold.ttf') format('truetype');
@@ -154,7 +152,7 @@ nav { top: 40px !important; }
   --overlay-accent-soft: rgba(232, 124, 30, 0.1);
   --overlay-orange-light: rgba(244, 121, 32, 0.08);
   --overlay-orange-medium: rgba(244, 121, 32, 0.2);
-  --overlay-orange-soft: rgba(244, 121, 32, 0.3);
+  --overlay-orange-soft: rgba(244, 121, 32, 0.65);
   --overlay-orange-glow-light: rgba(244, 121, 32, 0.25);
   --overlay-orange-glow-medium: rgba(244, 121, 32, 0.35);
   --overlay-orange-glow-strong: rgba(244, 121, 32, 0.4);
@@ -241,7 +239,7 @@ body.dark-theme {
   --overlay-accent-soft: rgba(232, 124, 30, 0.1);
   --overlay-orange-light: rgba(232, 124, 30, 0.08);
   --overlay-orange-medium: rgba(232, 124, 30, 0.2);
-  --overlay-orange-soft: rgba(232, 124, 30, 0.3);
+  --overlay-orange-soft: rgba(232, 124, 30, 0.65);
   --overlay-orange-glow-light: rgba(232, 124, 30, 0.25);
   --overlay-orange-glow-medium: rgba(232, 124, 30, 0.35);
   --overlay-orange-glow-strong: rgba(232, 124, 30, 0.4);
@@ -269,7 +267,7 @@ body.dark-theme {
   padding: 0;
 }
 
-html { scroll-behavior: smooth; }
+/* scroll-behavior removed — all scrolling handled by JS animateScrollTo() */
 
 body {
   font-family: 'Source Sans 3', sans-serif;
@@ -482,33 +480,33 @@ body.dark-theme .service-card h3 {
 
 body.dark-theme .service-card--brand,
 body.dark-theme .service-card:nth-child(1) {
-  background: rgba(244, 121, 32, 0.07);
-  border-color: rgba(244, 121, 32, 0.2);
+  background: var(--overlay-orange-light);
+  border-color: var(--overlay-orange-medium);
 }
 
 body.dark-theme .service-card--brand:hover,
 body.dark-theme .service-card:nth-child(1):hover {
-  background: linear-gradient(135deg, rgba(244, 121, 32, 0.14) 0%, rgba(244, 121, 32, 0.07) 100%);
-  box-shadow: 0 8px 32px rgba(244, 121, 32, 0.15);
-  border-color: rgba(244, 121, 32, 0.3);
+  background: linear-gradient(135deg, var(--overlay-accent-strong) 0%, var(--overlay-orange-light) 100%);
+  box-shadow: 0 8px 32px var(--overlay-orange-glow-light);
+  border-color: var(--overlay-orange-glow-medium);
 }
 
 body.dark-theme .service-card--info {
-  background: rgba(58, 130, 246, 0.07);
-  border-color: rgba(58, 130, 246, 0.2);
+  background: var(--overlay-info-ultra-light);
+  border-color: var(--info-border-soft);
 }
 
 body.dark-theme .service-card--info:hover {
-  background: rgba(58, 130, 246, 0.12);
+  background: var(--overlay-info-card-hover);
 }
 
 body.dark-theme .service-card--success {
-  background: rgba(16, 185, 129, 0.07);
-  border-color: rgba(16, 185, 129, 0.2);
+  background: var(--overlay-success-ultra-light);
+  border-color: var(--success-border-soft);
 }
 
 body.dark-theme .service-card--success:hover {
-  background: rgba(16, 185, 129, 0.12);
+  background: var(--overlay-success-card-hover);
 }
 
 body.dark-theme .specialist-more-link {
@@ -991,6 +989,14 @@ body.dark-theme .section-desc {
   max-width: 600px;
 }
 
+.section-desc + .section-desc { margin-top: 16px; }
+
+.section-more-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
 body.dark-theme .section-desc {
   color: #BBBBBB;
 }
@@ -1367,7 +1373,7 @@ body.dark-theme .section-desc {
   text-decoration: none;
 }
 
-.step:hover { padding-left: 12px; }
+.step:hover { transform: translateX(8px); }
 .step:last-child { border-bottom: none; }
 
 a.step {
@@ -3173,5 +3179,17 @@ body.dark-theme .doc-text {
     font-size: 0.85rem;
     padding: 6px 12px;
     z-index: 2001;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle,
+  .hero-logo-wrap,
+  .scroll-hint {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  * {
+    animation-iteration-count: 1 !important;
   }
 }

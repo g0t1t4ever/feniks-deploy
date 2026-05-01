@@ -154,22 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
     navLogo.style.transform = 'scale(1)';
   }
 
-  // ── SMOOTH SECTION SCROLL-SNAP ───────────────
-  if (heroSection) {
-    const sections = Array.from(document.querySelectorAll(
-      '#hero, #why-us, #services, #program, #activity, #specialists, #branches, #contact'
-    ));
-
-  function sectionTop(el) {
-    return Math.round(el.getBoundingClientRect().top + window.scrollY);
-  }
-
+  // ── SCROLL HELPERS (shared: snap-scroll, scroll-to-top, burger) ─
   let isScrolling = false;
   let rafId       = null;
 
   function easeInOutQuart(t) {
     return t < 0.5 ? 8*t*t*t*t : 1 - Math.pow(-2*t+2,4)/2;
   }
+
+  function sectionTop(el) {
+    return Math.round(el.getBoundingClientRect().top + window.scrollY);
+  }
+
+  function navOffset() { return navbar.offsetHeight; }
 
   function animateScrollTo(target) {
     const start    = window.scrollY;
@@ -189,7 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
     rafId = requestAnimationFrame(step);
   }
 
-  function navOffset() { return navbar.offsetHeight; }
+  // ── SMOOTH SECTION SCROLL-SNAP ───────────────
+  if (heroSection) {
+    const sections = Array.from(document.querySelectorAll(
+      '#hero, #why-us, #services, #program, #activity, #specialists, #branches, #contact'
+    ));
 
   function findTarget(dir) {
     const cy = window.scrollY;
@@ -562,6 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (photoModal && galleryImgs.length > 0) {
     let currentPhotoIndex = 0;
     let allPhotos = Array.from(galleryImgs).map(img => img.querySelector('img').src);
+    let lastFocusedElement = null;
 
     // Open modal on gallery image click
     galleryImgs.forEach((galleryImg, index) => {
@@ -569,10 +571,12 @@ document.addEventListener('DOMContentLoaded', () => {
       img.style.cursor = 'pointer';
 
       function openModal() {
+        lastFocusedElement = document.activeElement;
         currentPhotoIndex = index;
         showPhoto();
         photoModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => photoModalClose.focus());
       }
 
       // Desktop click
@@ -604,6 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function showPhoto() {
       if (allPhotos.length === 0) return;
       photoModalImage.src = allPhotos[currentPhotoIndex];
+      photoModalImage.alt = Array.from(galleryImgs)[currentPhotoIndex].querySelector('img').alt || 'Фото';
       photoModalCounter.textContent = `${currentPhotoIndex + 1} / ${allPhotos.length}`;
     }
 
@@ -620,6 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeModal() {
       photoModal.classList.remove('active');
       document.body.style.overflow = '';
+      if (lastFocusedElement) { lastFocusedElement.focus(); lastFocusedElement = null; }
     }
 
     // Event listeners
@@ -632,12 +638,21 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === photoModal) closeModal();
     });
 
-    // Keyboard navigation
+    // Keyboard navigation + focus trap
     document.addEventListener('keydown', e => {
       if (!photoModal.classList.contains('active')) return;
       if (e.key === 'ArrowRight') nextPhoto();
       if (e.key === 'ArrowLeft') prevPhoto();
       if (e.key === 'Escape') closeModal();
+      if (e.key === 'Tab') {
+        const focusables = [photoModalPrev, photoModalClose, photoModalNext];
+        const idx = focusables.indexOf(document.activeElement);
+        e.preventDefault();
+        const next = e.shiftKey
+          ? focusables[(idx - 1 + focusables.length) % focusables.length]
+          : focusables[(idx + 1) % focusables.length];
+        next.focus();
+      }
     });
 
     // Swipe navigation on mobile
@@ -732,11 +747,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Photo modal functions (only on pages with modal)
   if (photoModal) {
     let currentGalleryPhotos = [];
+    let currentGalleryAlts = [];
     let currentPhotoIndex = 0;
+    let lastFocusedEl = null;
 
     function showPhoto() {
       if (currentGalleryPhotos.length === 0) return;
       photoModalImage.src = currentGalleryPhotos[currentPhotoIndex];
+      photoModalImage.alt = currentGalleryAlts[currentPhotoIndex] || 'Фото';
       photoModalCounter.textContent = `${currentPhotoIndex + 1} / ${currentGalleryPhotos.length}`;
     }
 
@@ -784,16 +802,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Photo viewer modal
       const allDocPhotos = Array.from(docGalleryImgs).map(el => el.querySelector('img').src);
+      const allDocAlts   = Array.from(docGalleryImgs).map(el => el.querySelector('img').alt || 'Фото');
 
       // Open modal on image click
       docGalleryImgs.forEach((el, index) => {
         el.addEventListener('click', (e) => {
           if (isDragging) return;
+          lastFocusedEl = document.activeElement;
           currentGalleryPhotos = allDocPhotos;
+          currentGalleryAlts = allDocAlts;
           currentPhotoIndex = index;
           showPhoto();
           photoModal.classList.add('active');
           document.body.style.overflow = 'hidden';
+          requestAnimationFrame(() => document.getElementById('photoModalClose').focus());
         });
       });
     });
@@ -804,9 +826,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('photoModalClose').addEventListener('click', () => {
       photoModal.classList.remove('active');
       document.body.style.overflow = '';
+      if (lastFocusedEl) { lastFocusedEl.focus(); lastFocusedEl = null; }
     });
 
-    // Keyboard navigation
+    // Keyboard navigation + focus trap
     document.addEventListener('keydown', e => {
       if (!photoModal.classList.contains('active')) return;
       if (e.key === 'ArrowRight') nextPhoto();
@@ -814,6 +837,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape') {
         photoModal.classList.remove('active');
         document.body.style.overflow = '';
+        if (lastFocusedEl) { lastFocusedEl.focus(); lastFocusedEl = null; }
+      }
+      if (e.key === 'Tab') {
+        const mc = document.getElementById('photoModalClose');
+        const mp = document.getElementById('photoModalPrev');
+        const mn = document.getElementById('photoModalNext');
+        const focusables = [mp, mc, mn];
+        const idx = focusables.indexOf(document.activeElement);
+        e.preventDefault();
+        const next = e.shiftKey
+          ? focusables[(idx - 1 + focusables.length) % focusables.length]
+          : focusables[(idx + 1) % focusables.length];
+        next.focus();
       }
     });
 

@@ -1,7 +1,7 @@
 <?php
-// Telegram credentials — move to env or config outside webroot for extra security
-define('TG_TOKEN',   '8744500239:AAEuLaUrZ493kOycWZU_N_VsytkcMvtsMV4');
-define('TG_CHAT_ID', '8366040164');
+// Set TG_TOKEN and TG_CHAT_ID as environment variables on the server
+define('TG_TOKEN',   getenv('TG_TOKEN'));
+define('TG_CHAT_ID', getenv('TG_CHAT_ID'));
 
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
