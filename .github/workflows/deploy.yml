@@ -10,5 +10,5 @@ jobs:
     steps:
       - name: Pull latest code
         run: |
-          cd ${{ secrets.SSH_PATH }}
+          cd /var/www/ch6dabc3a9/www/phoenyx.com.ua
           git pull origin main
