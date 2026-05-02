@@ -152,6 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // На about.html просто показуємо логотип
     navLogo.style.opacity = '1';
     navLogo.style.transform = 'scale(1)';
+    if (navbar) {
+      navbar.classList.add('doc-page');
+      const updateDocNav = () => {
+        if (window.scrollY > 0) navbar.classList.add('scrolled');
+        else navbar.classList.remove('scrolled');
+      };
+      window.addEventListener('scroll', updateDocNav);
+      updateDocNav();
+    }
   }
 
   // ── SCROLL HELPERS (shared: snap-scroll, scroll-to-top, burger) ─
@@ -306,6 +315,35 @@ document.addEventListener('DOMContentLoaded', () => {
     { threshold: 0.12 }
   );
   reveals.forEach(el => observer.observe(el));
+
+  // ── DOC GALLERY STRIP SCROLL HINT (mobile, about.html) ─────
+  const galleryWraps = document.querySelectorAll('.doc-gallery-strip-wrap');
+  if (galleryWraps.length && window.matchMedia('(max-width: 768px)').matches) {
+    const easeInOut = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    const animateScroll = (el, from, to, duration) => new Promise(resolve => {
+      const start = performance.now();
+      const step = now => {
+        const p = Math.min((now - start) / duration, 1);
+        el.scrollLeft = from + (to - from) * easeInOut(p);
+        if (p < 1) requestAnimationFrame(step); else resolve();
+      };
+      requestAnimationFrame(step);
+    });
+    const runHint = async wrap => {
+      if (wrap.scrollLeft !== 0) return;
+      await animateScroll(wrap, 0, 80, 700);
+      await new Promise(r => setTimeout(r, 300));
+      await animateScroll(wrap, 80, 0, 600);
+    };
+    const galleryHintObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        galleryHintObserver.unobserve(e.target);
+        setTimeout(() => runHint(e.target), 400);
+      });
+    }, { threshold: 0.3 });
+    galleryWraps.forEach(w => galleryHintObserver.observe(w));
+  }
 
   // ── FORM SUBMIT ─────────────────────────────
   // ── CONTACT FORM SUBMISSION ─────────────────
@@ -684,12 +722,17 @@ document.addEventListener('DOMContentLoaded', () => {
       toggle.addEventListener('click', e => {
         e.preventDefault();
         const group = toggle.getAttribute('data-group');
-        const subitems = docSidebar.querySelector(`.doc-sidebar-subitems[data-group="${group}"]`);
 
+        if (window.innerWidth <= 768) {
+          const target = document.getElementById(group);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+
+        const subitems = docSidebar.querySelector(`.doc-sidebar-subitems[data-group="${group}"]`);
         toggle.classList.toggle('collapsed');
         subitems.classList.toggle('hidden');
 
-        // Update ARIA attributes for accessibility
         const isExpanded = !toggle.classList.contains('collapsed');
         toggle.setAttribute('aria-expanded', isExpanded);
         subitems.setAttribute('aria-hidden', !isExpanded);
