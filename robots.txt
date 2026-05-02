@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://phoenyx.com.ua/sitemap.xml
