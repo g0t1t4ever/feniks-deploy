@@ -3,12 +3,321 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Про нас — Фенікс | Тренінг Центр</title>
-  <meta name="description" content="">
+  <title>Про нас — ГО «Фенікс+» | Тренінг Центр</title>
+  <meta name="description" content="Громадська організація «Фенікс+» — реабілітаційний центр від залежностей. Заснована у 2021. 4 центри по Україні. Команда спеціалістів.">
+  <meta name="keywords" content="про нас, фенікс плюс, громадська організація, реабілітація, команда спеціалістів, україна">
   <link rel="canonical" href="https://phoenyx.com.ua/pro-nas.html">
   <link rel="icon" type="image/png" href="assets/images/logo.png">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"></noscript>
+  <style>
+    .pn-page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 136px 24px 80px;
+    }
+    .pn-header {
+      margin-bottom: 48px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #D3D1C7;
+    }
+    .pn-header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #2C2C2A;
+      margin: 0 0 6px;
+    }
+    .pn-header p {
+      font-size: 14px;
+      color: #73726C;
+      margin: 0;
+    }
+    .pn-section {
+      margin-bottom: 48px;
+    }
+    .pn-section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2C2C2A;
+      margin: 0 0 14px;
+    }
+    .pn-lead {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #2C2C2A;
+      margin: 0 0 10px;
+    }
+    .pn-sub {
+      font-size: 14px;
+      color: #73726C;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Stats */
+    .pn-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .pn-stat {
+      background: #F5F3ED;
+      border: 1px solid #D3D1C7;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .pn-stat-num {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1D9E75;
+      margin: 0 0 4px;
+      line-height: 1;
+    }
+    .pn-stat-label {
+      font-size: 13px;
+      color: #73726C;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    /* Team */
+    .pn-team {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .pn-member {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .pn-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #F5F3ED;
+      border: 1px solid #D3D1C7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 600;
+      color: #73726C;
+    }
+    .pn-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+    .pn-member-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #2C2C2A;
+      margin: 0 0 2px;
+    }
+    .pn-member-role {
+      font-size: 13px;
+      color: #73726C;
+      margin: 0;
+      line-height: 1.4;
+    }
+    .pn-team-link {
+      display: inline-block;
+      color: #1D9E75;
+      font-size: 14px;
+      text-decoration: none;
+      margin-top: 14px;
+    }
+    .pn-team-link:hover { text-decoration: underline; }
+
+    /* CTA */
+    .pn-cta {
+      background: #F5F3ED;
+      border: 1px solid #D3D1C7;
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .pn-cta p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #2C2C2A;
+      margin: 0 0 18px;
+    }
+    .pn-phones {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .pn-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1D9E75;
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 4px;
+      transition: background 0.15s;
+    }
+    .pn-phone:hover { background: #178a65; }
+
+    @media (max-width: 768px) {
+      .pn-page { padding: 130px 16px 60px; }
+      .pn-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
+
+<div class="phone-strip" id="phoneStrip">
+  <a href="tel:0508647865" class="phone-strip__num">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2l0 4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/></svg>
+    050-864-7865
+  </a>
+  <a href="tel:0635202031" class="phone-strip__num">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2l0 4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/></svg>
+    063-520-2031
+  </a>
+  <span class="phone-strip__label">Анонімно · Безкоштовно · 24/7</span>
+  <div class="phone-strip__socials">
+    <a href="https://t.me/fenix_plus_bot" target="_blank" rel="noopener" aria-label="Telegram"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+    <a href="https://www.instagram.com/fenix_plus2023" target="_blank" rel="noopener" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+    <a href="https://www.facebook.com/share/1bueXvEWqw" target="_blank" rel="noopener" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+  </div>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo" id="navLogo">
+    <picture>
+      <source srcset="assets/images/logo.webp" type="image/webp">
+      <img src="assets/images/logo.png" alt="Фенікс">
+    </picture>
+    <div class="nav-logo-text">
+      ФЕНІКС
+      <span>ТРЕНІНГ-ЦЕНТР</span>
+    </div>
+  </a>
+  <div class="nav-links" id="navMenu">
+    <a href="index.html#services">Послуги</a>
+    <a href="index.html#program">Програма</a>
+    <a href="index.html#specialists">Спеціалісти</a>
+    <a href="index.html#contact" class="nav-cta">Залишити заявку</a>
+    <button class="nav-theme-toggle" id="themeToggle" aria-label="Перемикач теми">
+      <i class="ti ti-sun-filled"></i>
+    </button>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Меню" aria-expanded="false" aria-controls="navMenu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<main class="pn-page">
+
+  <header class="pn-header">
+    <h1>Про нас</h1>
+    <p>Громадська організація «Фенікс+» · Засн. 2021</p>
+  </header>
+
+  <section class="pn-section">
+    <h2 class="pn-section-title">Громадська організація «Фенікс+»</h2>
+    <p class="pn-lead">Реабілітаційний центр для людей із залежністю від алкоголю, наркотиків та азартних ігор. Заснована у 2021 році, сьогодні працює як мережа з 4 центрів по всій Україні.</p>
+    <p class="pn-sub">Консультації — анонімно, безкоштовно, 24/7.</p>
+  </section>
+
+  <section class="pn-section">
+    <h2 class="pn-section-title">Що ми робимо</h2>
+    <p class="pn-lead">Допомагаємо людям позбутися залежності та повернутися до нормального життя. Програма включає медичну детоксикацію, психологічну реабілітацію та соціальну адаптацію — від першого дзвінка до постреабілітаційного супроводу.</p>
+    <p class="pn-sub">Кожна програма складається індивідуально: тривалість, методи і темп залежать від стану та історії конкретної людини.</p>
+  </section>
+
+  <section class="pn-section">
+    <h2 class="pn-section-title">Цифри</h2>
+    <div class="pn-stats">
+      <div class="pn-stat">
+        <div class="pn-stat-num">4</div>
+        <p class="pn-stat-label">реабілітаційних центри в Україні</p>
+      </div>
+      <div class="pn-stat">
+        <div class="pn-stat-num">2021</div>
+        <p class="pn-stat-label">рік заснування</p>
+      </div>
+      <div class="pn-stat">
+        <div class="pn-stat-num">24/7</div>
+        <p class="pn-stat-label">цілодобова підтримка</p>
+      </div>
+      <div class="pn-stat">
+        <div class="pn-stat-num">0 грн</div>
+        <p class="pn-stat-label">перша консультація — безкоштовно і анонімно</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pn-section">
+    <h2 class="pn-section-title">Команда</h2>
+    <div class="pn-team">
+      <div class="pn-member">
+        <div class="pn-avatar">
+          <img src="assets/images/specialist-1.png" alt="Максим Васильєв" loading="lazy">
+        </div>
+        <div>
+          <p class="pn-member-name">Максим Васильєв</p>
+          <p class="pn-member-role">Керівник ГО «Фенікс+» · 8 років практики</p>
+        </div>
+      </div>
+      <div class="pn-member">
+        <div class="pn-avatar">
+          <img src="assets/images/specialist-2.png" alt="Олексій Архіпов" loading="lazy">
+        </div>
+        <div>
+          <p class="pn-member-name">Олексій Архіпов</p>
+          <p class="pn-member-role">Програмний директор, аддиктолог · 10 років практики</p>
+        </div>
+      </div>
+      <div class="pn-member">
+        <div class="pn-avatar">
+          <img src="assets/images/specialist-3.png" alt="Сергій Овсянко" loading="lazy">
+        </div>
+        <div>
+          <p class="pn-member-name">Сергій Овсянко</p>
+          <p class="pn-member-role">Практичний психолог, гештальт-терапевт, аддиктолог · 12 років практики</p>
+        </div>
+      </div>
+      <div class="pn-member">
+        <div class="pn-avatar">ВБ</div>
+        <div>
+          <p class="pn-member-name">Валентина Бригадинова</p>
+          <p class="pn-member-role">Практичний психолог, транзакційний аналіз, КПТ · 30 років практики</p>
+        </div>
+      </div>
+    </div>
+    <a href="spetsialisty.html" class="pn-team-link">Детальніше про команду →</a>
+  </section>
+
+  <section class="pn-section">
+    <h2 class="pn-section-title">Підхід</h2>
+    <p class="pn-lead">Основа програми — 12-кроковий метод у поєднанні з індивідуальною та груповою психотерапією. Додатково: арт-терапія, спорт, волонтерська діяльність, підготовка до працевлаштування.</p>
+    <p class="pn-sub">Багато наших спеціалістів самі пройшли реабілітацію — це не теорія, а особистий досвід.</p>
+  </section>
+
+  <section class="pn-section">
+    <div class="pn-cta">
+      <h2 class="pn-section-title">Зверніться до нас</h2>
+      <p>Якщо ви або ваш близький потребує допомоги — зателефонуйте. Перша консультація безкоштовна і анонімна.</p>
+      <div class="pn-phones">
+        <a href="tel:0508647865" class="pn-phone">050-864-7865</a>
+        <a href="tel:0635202031" class="pn-phone">063-520-2031</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
