@@ -12,100 +12,56 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"></noscript>
   <style>
-    .pn-page {
-      max-width: 1000px;
+    .pn-page-header {
+      padding: 152px 24px 48px;
+      max-width: 860px;
       margin: 0 auto;
-      padding: 136px 24px 80px;
     }
-    .pn-header {
-      margin-bottom: 48px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid #D3D1C7;
-    }
-    .pn-header h1 {
-      font-size: 28px;
-      font-weight: 600;
-      color: #2C2C2A;
-      margin: 0 0 6px;
-    }
-    .pn-header p {
-      font-size: 14px;
-      color: #73726C;
-      margin: 0;
-    }
-    .pn-section {
-      margin-bottom: 48px;
-    }
-    .pn-section-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: #2C2C2A;
-      margin: 0 0 14px;
-    }
-    .pn-lead {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #2C2C2A;
-      margin: 0 0 10px;
-    }
-    .pn-sub {
-      font-size: 14px;
-      color: #73726C;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    /* Stats */
-    .pn-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .pn-stat {
-      background: #F5F3ED;
-      border: 1px solid #D3D1C7;
-      border-radius: 8px;
-      padding: 20px;
-    }
-    .pn-stat-num {
-      font-size: 26px;
+    .pn-page-header h1 {
+      font-family: 'TT Norms Pro', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
       font-weight: 700;
-      color: #1D9E75;
-      margin: 0 0 4px;
-      line-height: 1;
+      color: var(--text-primary);
+      margin: 0 0 10px;
+      line-height: 1.15;
     }
-    .pn-stat-label {
-      font-size: 13px;
-      color: #73726C;
+    .pn-page-header p {
+      font-size: 1rem;
+      color: var(--text-secondary);
       margin: 0;
-      line-height: 1.4;
+    }
+    .pn-page-header h1 em {
+      font-style: italic;
+      color: var(--orange-main);
     }
 
-    /* Team */
+    /* Team compact rows */
     .pn-team {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+      margin-top: 8px;
     }
     .pn-member {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
     .pn-avatar {
-      width: 52px;
-      height: 52px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       overflow: hidden;
       flex-shrink: 0;
-      background: #F5F3ED;
-      border: 1px solid #D3D1C7;
+      background: var(--bg-secondary);
+      border: 2px solid var(--color-subtle-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
-      font-weight: 600;
-      color: #73726C;
+      font-family: 'TT Norms Pro', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-secondary);
     }
     .pn-avatar img {
       width: 100%;
@@ -114,62 +70,64 @@
       object-position: top;
     }
     .pn-member-name {
-      font-size: 15px;
+      font-family: 'TT Norms Pro', sans-serif;
+      font-size: 1rem;
       font-weight: 600;
-      color: #2C2C2A;
+      color: var(--text-primary);
       margin: 0 0 2px;
     }
     .pn-member-role {
-      font-size: 13px;
-      color: #73726C;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
       margin: 0;
       line-height: 1.4;
     }
     .pn-team-link {
-      display: inline-block;
-      color: #1D9E75;
-      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--orange-main);
+      font-size: 0.9rem;
+      font-weight: 600;
       text-decoration: none;
-      margin-top: 14px;
+      margin-top: 20px;
+      transition: opacity 0.2s;
     }
-    .pn-team-link:hover { text-decoration: underline; }
+    .pn-team-link:hover { opacity: 0.75; }
 
-    /* CTA */
+    /* CTA block */
     .pn-cta {
-      background: #F5F3ED;
-      border: 1px solid #D3D1C7;
-      border-radius: 8px;
-      padding: 24px;
+      text-align: center;
+      padding: 56px 24px;
     }
-    .pn-cta p {
-      font-size: 16px;
-      line-height: 1.6;
-      color: #2C2C2A;
-      margin: 0 0 18px;
-    }
+    .pn-cta .section-title { margin-bottom: 16px; }
     .pn-phones {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 28px;
     }
     .pn-phone {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #1D9E75;
+      background: var(--orange-main);
       color: #fff;
       text-decoration: none;
-      font-size: 15px;
-      font-weight: 600;
-      padding: 12px 24px;
-      border-radius: 4px;
-      transition: background 0.15s;
+      font-family: 'TT Norms Pro', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
     }
-    .pn-phone:hover { background: #178a65; }
+    .pn-phone:hover { background: var(--orange-hover); }
 
     @media (max-width: 768px) {
-      .pn-page { padding: 130px 16px 60px; }
-      .pn-stats { grid-template-columns: 1fr 1fr; }
+      .pn-page-header { padding: 140px 16px 40px; }
+      .pn-phones { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
@@ -217,50 +175,106 @@
   </button>
 </nav>
 
-<main class="pn-page">
+<!-- ── ЗАГОЛОВОК СТОРІНКИ ───────────────────── -->
+<header class="pn-page-header">
+  <h1>Про <em>нас</em></h1>
+  <p>Громадська організація «Фенікс+» · Засн. 2021</p>
+</header>
 
-  <header class="pn-header">
-    <h1>Про нас</h1>
-    <p>Громадська організація «Фенікс+» · Засн. 2021</p>
-  </header>
+<!-- ── ХТО МИ ──────────────────────────────── -->
+<section>
+  <div class="section">
+    <p class="section-label reveal">Організація</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      Громадська організація<br><em>«Фенікс+»</em>
+    </h2>
+    <p class="section-desc reveal reveal-delay-2">
+      Реабілітаційний центр для людей із залежністю від алкоголю, наркотиків та азартних ігор. Заснована у 2021 році, сьогодні працює як мережа з 4 центрів по всій Україні.
+    </p>
+    <p class="section-desc reveal reveal-delay-2">
+      Консультації — анонімно, безкоштовно, 24/7.
+    </p>
 
-  <section class="pn-section">
-    <h2 class="pn-section-title">Громадська організація «Фенікс+»</h2>
-    <p class="pn-lead">Реабілітаційний центр для людей із залежністю від алкоголю, наркотиків та азартних ігор. Заснована у 2021 році, сьогодні працює як мережа з 4 центрів по всій Україні.</p>
-    <p class="pn-sub">Консультації — анонімно, безкоштовно, 24/7.</p>
-  </section>
-
-  <section class="pn-section">
-    <h2 class="pn-section-title">Що ми робимо</h2>
-    <p class="pn-lead">Допомагаємо людям позбутися залежності та повернутися до нормального життя. Програма включає медичну детоксикацію, психологічну реабілітацію та соціальну адаптацію — від першого дзвінка до постреабілітаційного супроводу.</p>
-    <p class="pn-sub">Кожна програма складається індивідуально: тривалість, методи і темп залежать від стану та історії конкретної людини.</p>
-  </section>
-
-  <section class="pn-section">
-    <h2 class="pn-section-title">Цифри</h2>
-    <div class="pn-stats">
-      <div class="pn-stat">
-        <div class="pn-stat-num">4</div>
-        <p class="pn-stat-label">реабілітаційних центри в Україні</p>
+    <div class="fact-block reveal reveal-delay-3">
+      <div class="fact">
+        <div class="fact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l18 0"/><path d="M9 8l1 0"/><path d="M9 12l1 0"/><path d="M9 16l1 0"/><path d="M14 8l1 0"/><path d="M14 12l1 0"/><path d="M14 16l1 0"/><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16"/></svg>
+        </div>
+        <div class="fact-num">4</div>
+        <div class="fact-label">Центри<br>в Україні</div>
       </div>
-      <div class="pn-stat">
-        <div class="pn-stat-num">2021</div>
-        <p class="pn-stat-label">рік заснування</p>
+      <div class="fact-divider"></div>
+      <div class="fact">
+        <div class="fact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18"/></svg>
+        </div>
+        <div class="fact-num">2021</div>
+        <div class="fact-label">Рік<br>заснування</div>
       </div>
-      <div class="pn-stat">
-        <div class="pn-stat-num">24/7</div>
-        <p class="pn-stat-label">цілодобова підтримка</p>
-      </div>
-      <div class="pn-stat">
-        <div class="pn-stat-num">0 грн</div>
-        <p class="pn-stat-label">перша консультація — безкоштовно і анонімно</p>
+      <div class="fact-divider"></div>
+      <div class="fact">
+        <div class="fact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2l0 4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"/></svg>
+        </div>
+        <div class="fact-num">24/7</div>
+        <div class="fact-label">Цілодобова<br>підтримка</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="pn-section">
-    <h2 class="pn-section-title">Команда</h2>
-    <div class="pn-team">
+<!-- ── ЩО МИ РОБИМО ─────────────────────────── -->
+<div class="section-alt">
+  <div class="section-inner">
+    <p class="section-label reveal">Що ми робимо</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      Від першого дзвінка<br><em>до нового життя</em>
+    </h2>
+    <div class="why-cards reveal reveal-delay-2">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"/></svg>
+        </div>
+        <h4>Медична детоксикація</h4>
+        <p>Безпечне очищення організму під медичним контролем — перший крок до відновлення</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/><path d="M9 10l.01 0"/><path d="M15 10l.01 0"/><path d="M9.5 15a3.5 3.5 0 0 0 5 0"/></svg>
+        </div>
+        <h4>Психологічна реабілітація</h4>
+        <p>Індивідуальна та групова психотерапія, 12-кроковий метод, робота з першопричинами</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0 -4 -4h-6a4 4 0 0 0 -4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0 -3 -3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4>Соціальна адаптація</h4>
+        <p>Повернення в суспільство, підготовка до працевлаштування, відновлення стосунків</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9z"/><path d="M12 12l8 -4.5"/><path d="M12 12l-8 -4.5"/><path d="M12 12v9"/></svg>
+        </div>
+        <h4>Індивідуальний підхід</h4>
+        <p>Кожна програма складається персонально: тривалість і методи залежать від конкретної людини</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── КОМАНДА ──────────────────────────────── -->
+<section>
+  <div class="section">
+    <p class="section-label reveal">Команда</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      Спеціалісти,<br><em>які вірять у відновлення</em>
+    </h2>
+    <p class="section-desc reveal reveal-delay-2">
+      Багато наших спеціалістів самі пройшли реабілітацію — це не теорія, а особистий досвід.
+    </p>
+
+    <div class="pn-team reveal reveal-delay-3">
       <div class="pn-member">
         <div class="pn-avatar">
           <img src="assets/images/specialist-1.png" alt="Максим Васильєв" loading="lazy">
@@ -296,27 +310,47 @@
         </div>
       </div>
     </div>
-    <a href="spetsialisty.html" class="pn-team-link">Детальніше про команду →</a>
-  </section>
 
-  <section class="pn-section">
-    <h2 class="pn-section-title">Підхід</h2>
-    <p class="pn-lead">Основа програми — 12-кроковий метод у поєднанні з індивідуальною та груповою психотерапією. Додатково: арт-терапія, спорт, волонтерська діяльність, підготовка до працевлаштування.</p>
-    <p class="pn-sub">Багато наших спеціалістів самі пройшли реабілітацію — це не теорія, а особистий досвід.</p>
-  </section>
+    <a href="spetsialisty.html" class="pn-team-link reveal reveal-delay-4">
+      Детальніше про команду
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6l-6 6"/></svg>
+    </a>
+  </div>
+</section>
 
-  <section class="pn-section">
-    <div class="pn-cta">
-      <h2 class="pn-section-title">Зверніться до нас</h2>
-      <p>Якщо ви або ваш близький потребує допомоги — зателефонуйте. Перша консультація безкоштовна і анонімна.</p>
-      <div class="pn-phones">
-        <a href="tel:0508647865" class="pn-phone">050-864-7865</a>
-        <a href="tel:0635202031" class="pn-phone">063-520-2031</a>
-      </div>
+<!-- ── ПІДХІД ───────────────────────────────── -->
+<div class="section-alt">
+  <div class="section-inner">
+    <p class="section-label reveal">Підхід</p>
+    <h2 class="section-title reveal reveal-delay-1">
+      12 кроків та<br><em>особистий досвід</em>
+    </h2>
+    <p class="section-desc reveal reveal-delay-2">
+      Основа програми — 12-кроковий метод у поєднанні з індивідуальною та груповою психотерапією. Додатково: арт-терапія, спорт, волонтерська діяльність, підготовка до працевлаштування.
+    </p>
+  </div>
+</div>
+
+<!-- ── CTA ──────────────────────────────────── -->
+<section id="contact-pn">
+  <div class="pn-cta">
+    <picture>
+      <source srcset="assets/images/logo.webp" type="image/webp">
+      <img src="assets/images/logo.png" alt="Фенікс" class="cta-logo">
+    </picture>
+    <h2 class="section-title reveal">
+      Зверніться до нас<br>
+      <em style="color: var(--orange)">сьогодні</em>
+    </h2>
+    <p class="section-desc reveal reveal-delay-1">
+      Якщо ви або ваш близький потребує допомоги — зателефонуйте.<br>Перша консультація безкоштовна і анонімна.
+    </p>
+    <div class="pn-phones reveal reveal-delay-2">
+      <a href="tel:0508647865" class="pn-phone">050-864-7865</a>
+      <a href="tel:0635202031" class="pn-phone">063-520-2031</a>
     </div>
-  </section>
-
-</main>
+  </div>
+</section>
 
 <script src="assets/js/main.js"></script>
 </body>
