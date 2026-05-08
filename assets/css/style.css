@@ -2030,7 +2030,8 @@ body.dark-theme .step-num {
 
 .fan-description-right {
   display: flex;
-  align-items: start;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .fan-description-right .section-desc {
