@@ -913,4 +913,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
+  // ── ACTIVITY TABS ────────────────────────────
+  const activityTabsEl = document.getElementById('activityTabs');
+  const activityGalleryEl = document.getElementById('activity-gallery');
+
+  function activateActivityTab(tab) {
+    if (!activityTabsEl) return;
+    activityTabsEl.querySelectorAll('.activity-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.querySelectorAll('.activity-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === tab));
+  }
+
+  if (activityTabsEl) {
+    activityTabsEl.addEventListener('click', e => {
+      const btn = e.target.closest('.activity-tab');
+      if (!btn) return;
+      activateActivityTab(btn.dataset.tab);
+    });
+  }
+
+  // Cross-page deep-link: programa-reabilitatsii.html#tab-{name}
+  const hashTab = window.location.hash.match(/^#tab-(\w+)$/);
+  if (hashTab && activityTabsEl && activityGalleryEl) {
+    activateActivityTab(hashTab[1]);
+    requestAnimationFrame(() => {
+      isScrolling = true;
+      animateScrollTo(sectionTop(activityGalleryEl) - navOffset());
+    });
+  }
+
+  document.querySelectorAll('.service-card[data-activity]').forEach(card => {
+    card.addEventListener('click', () => {
+      const tab = card.dataset.activity;
+      activateActivityTab(tab);
+      if (activityGalleryEl) {
+        isScrolling = true;
+        animateScrollTo(sectionTop(activityGalleryEl) - navOffset());
+      }
+    });
+  });
+
 });
