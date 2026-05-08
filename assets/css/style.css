@@ -3678,6 +3678,13 @@ body.page-inner #navbar .nav-links a:hover {
   color: var(--text-secondary);
   font-style: italic;
 }
+.branch-note--location {
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--orange-main);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
 .branches-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
