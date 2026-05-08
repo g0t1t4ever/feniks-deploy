@@ -3685,6 +3685,16 @@ body.page-inner #navbar .nav-links a:hover {
   font-weight: 600;
   letter-spacing: 0.02em;
 }
+.branch-num {
+  font-family: 'TT Norms Pro', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted, var(--text-secondary));
+  margin-bottom: 4px;
+  opacity: 0.6;
+}
 .branches-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
