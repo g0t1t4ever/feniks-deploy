@@ -2174,6 +2174,17 @@ body.dark-theme .step-num {
   .related-services {
     grid-template-columns: 1fr;
   }
+
+  .related-service-card {
+    background: var(--bg-primary);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  body.dark-theme .related-service-card {
+    background: var(--bg-card);
+  }
 }
 
 /* ── CONTACT / CTA ─────────────────────────── */
