@@ -2118,9 +2118,15 @@ body.dark-theme .step-num {
     padding: 16px;
   }
 
+  .fan-description-right {
+    margin-top: 8px;
+    gap: 20px;
+  }
+
   .fan-description-right .section-desc,
   .fan-description-bottom .section-desc {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
   }
 }
 
