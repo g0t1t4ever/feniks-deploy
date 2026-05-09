@@ -2563,6 +2563,36 @@ body.dark-theme nav.doc-page .nav-burger span { background: var(--white); }
     text-align: center;
   }
 
+  /* Mobile dropdown — inline, no float */
+  .nav-dropdown__menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 0;
+    margin: 0;
+    background: transparent;
+    display: none;
+    min-width: unset;
+  }
+
+  .nav-dropdown:focus-within .nav-dropdown__menu,
+  .nav-dropdown.open .nav-dropdown__menu {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-dropdown__menu a {
+    padding: 8px 16px 8px 28px !important;
+    font-size: 0.82rem !important;
+    border-radius: 4px !important;
+  }
+
+  .nav-dropdown__menu--wide { min-width: unset; }
+
   /* Hero */
   #hero { min-height: 500px; }
   .hero-logo-img { width: 140px; height: 140px; }

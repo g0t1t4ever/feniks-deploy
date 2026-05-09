@@ -290,6 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = burger.classList.toggle('open');
       navMenu.classList.toggle('open');
       burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (!isOpen) document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
     });
 
     navMenu.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -307,6 +308,24 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // ── MOBILE NAV DROPDOWN TOGGLE ──────────────
+  document.querySelectorAll('.nav-dropdown__trigger').forEach(trigger => {
+    trigger.addEventListener('click', e => {
+      if (window.innerWidth > 768) return;
+      e.preventDefault();
+      const dropdown = trigger.closest('.nav-dropdown');
+      const opening = !dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+      if (opening) dropdown.classList.add('open');
+    });
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.nav-dropdown')) {
+      document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+    }
+  });
 
   // ── REVEAL ON SCROLL ────────────────────────
   const reveals  = document.querySelectorAll('.reveal');
