@@ -902,6 +902,7 @@ body.dark-theme .section-desc {
 #hero {
   position: relative;
   height: 100vh;
+  height: 100dvh;
   min-height: 600px;
   display: flex;
   flex-direction: column;
@@ -977,7 +978,7 @@ body.dark-theme .section-desc {
 
 .hero-tagline {
   font-family: 'TT Norms Pro', sans-serif;
-  font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
   font-weight: 700;
   letter-spacing: 0.35em;
   color: var(--orange-main);
@@ -2143,7 +2144,7 @@ body.dark-theme .step-num {
   flex-direction: column;
   gap: 8px;
   padding: 24px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--color-subtle-border);
   border-radius: 12px;
   text-decoration: none;
   color: inherit;
@@ -2614,7 +2615,7 @@ body.dark-theme nav.doc-page .nav-burger span { background: var(--white); }
   #hero { min-height: 500px; }
   .hero-logo-img { width: 140px; height: 140px; }
   .hero-name { margin-top: 8px; font-size: clamp(1.8rem, 5vw, 2.5rem); }
-  .hero-tagline { font-size: clamp(0.6rem, 1.2vw, 0.75rem); margin-top: 6px; }
+  .hero-tagline { font-size: clamp(0.7rem, 1.2vw, 0.75rem); margin-top: 6px; }
   .hero-subtitle { margin-top: 24px; font-size: clamp(0.8rem, 1.8vw, 0.95rem); padding: 0 16px; max-width: 100%; }
   .scroll-hint { display: none; }
 
@@ -2622,8 +2623,6 @@ body.dark-theme nav.doc-page .nav-burger span { background: var(--white); }
   .section { padding: 64px 20px; }
   .section-alt { padding: 64px 0; }
   .section-alt .section-inner { padding: 0 20px; }
-  #contact { padding: 80px 20px; }
-
   /* Why us */
   .why-grid { grid-template-columns: 1fr; gap: 32px; }
   .why-cards { grid-template-columns: 1fr; margin-top: 0; gap: 14px; }
@@ -2673,7 +2672,7 @@ body.dark-theme nav.doc-page .nav-burger span { background: var(--white); }
 
   .hero-logo-img { width: 120px; height: 120px; }
   .hero-name { font-size: clamp(1.5rem, 4vw, 2rem); margin-top: 6px; }
-  .hero-tagline { font-size: clamp(0.55rem, 1vw, 0.65rem); }
+  .hero-tagline { font-size: clamp(0.7rem, 1vw, 0.75rem); }
   .hero-subtitle { margin-top: 20px; font-size: clamp(0.75rem, 1.5vw, 0.85rem); line-height: 1.6; }
 
   .phone-strip { gap: 8px; }
@@ -2681,6 +2680,10 @@ body.dark-theme nav.doc-page .nav-burger span { background: var(--white); }
 
   nav { padding: 0 12px; }
   .nav-links { gap: 4px; }
+
+  .fact-block { flex-direction: column; gap: 16px; padding-top: 24px; }
+  .fact { padding: 0; flex-direction: row; gap: 14px; align-items: center; }
+  .fact-divider { display: none; }
 }
 
 .fact-block {
@@ -3440,7 +3443,7 @@ body.dark-theme .doc-text {
 }
 
 /* Extra small screens */
-@media (max-width: 480px) {
+@media (max-width: 479px) {
   .doc-gallery-img {
     flex: 0 0 100%;
     aspect-ratio: 1 / 1;
