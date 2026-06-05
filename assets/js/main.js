@@ -290,7 +290,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = burger.classList.toggle('open');
       navMenu.classList.toggle('open');
       burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      if (!isOpen) document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+      if (isOpen) {
+        document.body.classList.add('nav-open');
+      } else {
+        document.body.classList.remove('nav-open');
+        document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+      }
     });
 
     navMenu.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -300,6 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         burger.classList.remove('open');
         navMenu.classList.remove('open');
         burger.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('nav-open');
 
         const target = document.querySelector(link.getAttribute('href'));
         if (target) {
