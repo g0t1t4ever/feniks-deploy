@@ -294,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     navMenu.querySelectorAll('a[href^="#"]').forEach(link => {
+      if (link.classList.contains('nav-dropdown__trigger')) return;
       link.addEventListener('click', e => {
         e.preventDefault();
         burger.classList.remove('open');
@@ -312,8 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── MOBILE NAV DROPDOWN TOGGLE ──────────────
   document.querySelectorAll('.nav-dropdown__trigger').forEach(trigger => {
     trigger.addEventListener('click', e => {
-      if (window.innerWidth > 768) return;
       e.preventDefault();
+      if (window.innerWidth > 768) return;
       const dropdown = trigger.closest('.nav-dropdown');
       const opening = !dropdown.classList.contains('open');
       document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
