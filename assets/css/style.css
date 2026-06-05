@@ -2565,6 +2565,10 @@ body.dark-theme nav.doc-page .nav-burger span { background: var(--white); }
     background: var(--overlay-white-lighter-97);
     box-shadow: 0 8px 32px var(--overlay-dark-light);
     z-index: 998;
+    max-height: calc(100vh - 112px);
+    max-height: calc(100dvh - 112px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .nav-links.open { display: flex; }
