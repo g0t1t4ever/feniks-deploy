@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     navMenu.querySelectorAll('a[href^="#"]').forEach(link => {
-      if (link.classList.contains('nav-dropdown__trigger')) return;
+      if (link.classList.contains('nav-dropdown__trigger') && window.innerWidth <= 1024) return;
       link.addEventListener('click', e => {
         e.preventDefault();
         burger.classList.remove('open');
