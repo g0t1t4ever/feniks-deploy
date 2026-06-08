@@ -812,6 +812,11 @@ body.dark-theme nav.scrolled {
     box-shadow: none !important;
   }
 
+  nav:has(.nav-links.open) #navLogo {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+  }
+
   body.dark-theme nav:has(.nav-links.open) {
     background: var(--bg-primary) !important;
   }
