@@ -941,11 +941,12 @@ body.dark-theme .section-desc {
 
 .particle {
   position: absolute;
-  bottom: 0;
+  bottom: -4px;
   width: 3px;
   height: 3px;
   background: var(--orange-main);
   border-radius: 50%;
+  opacity: 0;
   animation: float-particle linear infinite backwards;
 }
 
@@ -3663,7 +3664,6 @@ body.dark-theme .doc-text {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .particle,
   .hero-logo-wrap,
   .scroll-hint {
     animation: none !important;

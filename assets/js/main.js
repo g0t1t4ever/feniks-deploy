@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
       p.style.height            = p.style.width;
       p.style.animationDuration = (Math.random() * 8 + 6) + 's';
       p.style.animationDelay    = (Math.random() * 6) + 's';
-      p.style.opacity           = Math.random() * 0.5;
       particleContainer.appendChild(p);
     }
   }
