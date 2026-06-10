@@ -29,16 +29,18 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── FLOATING PARTICLES ──────────────────────
   const particleContainer = document.getElementById('particles');
   if (particleContainer) {
-    // Reduce particles on mobile for better performance
-    const particleCount = window.innerWidth <= 768 ? 12 : 25;
+    const isMobileView    = window.innerWidth <= 768;
+    const particleCount   = isMobileView ? 12 : 40;
+    const minSize         = isMobileView ? 1 : 3;
+    const sizeRange       = isMobileView ? 4 : 7;
     for (let i = 0; i < particleCount; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
       p.style.left              = Math.random() * 100 + '%';
-      p.style.width             = (Math.random() * 4 + 1) + 'px';
+      p.style.width             = (Math.random() * sizeRange + minSize) + 'px';
       p.style.height            = p.style.width;
       p.style.animationDuration = (Math.random() * 8 + 6) + 's';
-      p.style.animationDelay    = (Math.random() * 8) + 's';
+      p.style.animationDelay    = (Math.random() * 6) + 's';
       p.style.opacity           = Math.random() * 0.5;
       particleContainer.appendChild(p);
     }
