@@ -923,6 +923,15 @@ body.dark-theme .section-desc {
   background: radial-gradient(ellipse 70% 60% at 50% 40%, #1a0a00 0%, #0a0a0a 70%);
 }
 
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../images/logo.png') center 45% / auto 110% no-repeat;
+  opacity: 0.09;
+  pointer-events: none;
+}
+
 .hero-particles {
   position: absolute;
   inset: 0;
