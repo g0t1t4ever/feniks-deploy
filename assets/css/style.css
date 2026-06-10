@@ -3518,9 +3518,9 @@ body.dark-theme .doc-text {
 }
 
 .photo-modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: fixed;
+  top: 16px;
+  right: 16px;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
@@ -3532,7 +3532,7 @@ body.dark-theme .doc-text {
   color: var(--text-on-dark);
   cursor: pointer;
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 2002;
 }
 
 .photo-modal-close:hover {
