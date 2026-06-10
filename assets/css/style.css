@@ -947,13 +947,13 @@ body.dark-theme .section-desc {
   background: var(--orange-main);
   border-radius: 50%;
   opacity: 0;
-  animation: float-particle linear infinite backwards;
+  animation: float-particle ease-in infinite backwards;
 }
 
 @keyframes float-particle {
   0%   { transform: translateY(0);      opacity: 0; }
-  12%  { opacity: 0.85; }
-  88%  { opacity: 0.6; }
+  15%  { opacity: 0.4; }
+  85%  { opacity: 0.2; }
   100% { transform: translateY(-105vh); opacity: 0; }
 }
 

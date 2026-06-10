@@ -29,15 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // ── FLOATING PARTICLES ──────────────────────
   const particleContainer = document.getElementById('particles');
   if (particleContainer) {
-    const particleCount = window.innerWidth <= 768 ? 12 : 40;
+    const particleCount = window.innerWidth <= 768 ? 12 : 25;
     for (let i = 0; i < particleCount; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
       p.style.left              = Math.random() * 100 + '%';
       p.style.width             = (Math.random() * 4 + 1) + 'px';
       p.style.height            = p.style.width;
-      p.style.animationDuration = (Math.random() * 8 + 6) + 's';
-      p.style.animationDelay    = (Math.random() * 6) + 's';
+      p.style.animationDuration = (Math.random() * 10 + 8) + 's';
+      p.style.animationDelay    = (Math.random() * 10) + 's';
       particleContainer.appendChild(p);
     }
   }
