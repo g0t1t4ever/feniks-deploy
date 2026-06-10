@@ -3669,7 +3669,7 @@ body.dark-theme .doc-text {
     animation: none !important;
     transition-duration: 0.01ms !important;
   }
-  * {
+  *:not(.particle) {
     animation-iteration-count: 1 !important;
   }
 }
