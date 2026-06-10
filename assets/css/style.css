@@ -947,7 +947,7 @@ body.dark-theme .section-desc {
   background: var(--orange-main);
   border-radius: 50%;
   opacity: 0;
-  animation: float-particle linear infinite;
+  animation: float-particle linear infinite backwards;
 }
 
 @keyframes float-particle {
