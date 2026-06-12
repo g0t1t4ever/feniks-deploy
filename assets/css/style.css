@@ -3365,6 +3365,36 @@ body.dark-theme .doc-text {
   color: #BBBBBB;
 }
 
+/* ── BRANCH CAROUSEL DOTS ─────────────────── */
+.branch-carousel-dots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 0 4px;
+}
+
+.branch-carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+body.dark-theme .branch-carousel-dot {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.branch-carousel-dot.active {
+  background: var(--orange-main);
+  transform: scale(1.25);
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .doc-wrapper {
@@ -3472,6 +3502,48 @@ body.dark-theme .doc-text {
   .doc-gallery-strip-wrap::-webkit-scrollbar-thumb {
     background: var(--orange-main);
     border-radius: 2px;
+  }
+
+  /* Branch gallery — Instagram carousel */
+  .branch-carousel-dots {
+    display: flex;
+  }
+
+  #branchStripWrap {
+    margin-left: calc(-1 * clamp(24px, 6vw, 48px));
+    margin-right: calc(-1 * clamp(24px, 6vw, 48px));
+    border-radius: 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #branchStripWrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  #branchStripWrap .doc-gallery-strip {
+    gap: 0;
+    padding: 0;
+  }
+
+  #branchStripWrap .doc-gallery-img {
+    flex: 0 0 100vw;
+    min-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+    scroll-snap-align: start;
+    aspect-ratio: 1 / 1;
+  }
+
+  #branchStripWrap .doc-gallery-img:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  #branchStripWrap .doc-gallery-img img {
+    border-radius: 0;
+    height: 100%;
   }
 }
 

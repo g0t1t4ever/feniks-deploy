@@ -244,6 +244,7 @@
             <div class="doc-gallery-img" data-gallery-group="pobut"><img src="assets/images/branch-pobut-10.jpg" alt="Затишні приміщення центру" width="360" height="360" loading="lazy"></div>
           </div>
         </div>
+        <div class="branch-carousel-dots" id="branchCarouselDots"></div>
 
         <!-- Gallery captions -->
         <div class="gallery-caption" id="branchGalleryCaption">
@@ -390,8 +391,13 @@
     (function () {
       var wrap = document.getElementById('branchStripWrap');
       var tabs = document.querySelectorAll('.branch-gallery-tab');
+      var dotsEl = document.getElementById('branchCarouselDots');
       if (!wrap || !tabs.length) return;
+
+      var currentGroup = 'pryroda';
+
       var easeInOut = function (t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; };
+
       function animateTo(el, to, duration) {
         var from = el.scrollLeft;
         var start = performance.now();
@@ -402,41 +408,80 @@
         }
         requestAnimationFrame(step);
       }
-      function updateActiveTab() {
-        var strip = wrap.querySelector('.doc-gallery-strip');
-        var images = strip.querySelectorAll('.doc-gallery-img');
-        var scrollCenter = wrap.scrollLeft + wrap.clientWidth / 2;
-        var closestGroup = null;
-        var closestDistance = Infinity;
 
+      function isMobile() { return window.innerWidth <= 768; }
+
+      function buildDots(group) {
+        if (!dotsEl || !isMobile()) return;
+        var images = wrap.querySelectorAll('[data-gallery-group="' + group + '"]');
+        dotsEl.innerHTML = '';
+        images.forEach(function (img, i) {
+          var dot = document.createElement('button');
+          dot.className = 'branch-carousel-dot' + (i === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', 'Фото ' + (i + 1));
+          (function (idx, grp) {
+            dot.addEventListener('click', function () {
+              var imgs = wrap.querySelectorAll('[data-gallery-group="' + grp + '"]');
+              var target = imgs[idx];
+              if (!target) return;
+              var wrapRect = wrap.getBoundingClientRect();
+              var targetRect = target.getBoundingClientRect();
+              animateTo(wrap, wrap.scrollLeft + (targetRect.left - wrapRect.left), 350);
+            });
+          })(i, group);
+          dotsEl.appendChild(dot);
+        });
+      }
+
+      function updateDotActive(group) {
+        if (!dotsEl || !isMobile()) return;
+        var images = Array.from(wrap.querySelectorAll('[data-gallery-group="' + group + '"]'));
+        var dots = dotsEl.querySelectorAll('.branch-carousel-dot');
+        var closestIdx = 0;
+        var closestDist = Infinity;
+        var wrapRect = wrap.getBoundingClientRect();
+        images.forEach(function (img, i) {
+          var rect = img.getBoundingClientRect();
+          var dist = Math.abs((rect.left - wrapRect.left + rect.width / 2) - wrap.clientWidth / 2);
+          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+        });
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle('active', i === closestIdx);
+        });
+      }
+
+      function getCenterGroup() {
+        var images = wrap.querySelectorAll('.doc-gallery-img');
+        var closestGroup = null;
+        var closestDist = Infinity;
+        var wrapRect = wrap.getBoundingClientRect();
         images.forEach(function (img) {
           var group = img.getAttribute('data-gallery-group');
           if (!group) return;
           var rect = img.getBoundingClientRect();
-          var wrapRect = wrap.getBoundingClientRect();
-          var imgCenterInViewport = rect.left - wrapRect.left + rect.width / 2;
-          var distance = Math.abs(imgCenterInViewport - wrap.clientWidth / 2);
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closestGroup = group;
-          }
+          var dist = Math.abs((rect.left - wrapRect.left + rect.width / 2) - wrap.clientWidth / 2);
+          if (dist < closestDist) { closestDist = dist; closestGroup = group; }
+        });
+        return closestGroup;
+      }
+
+      function updateActiveTab() {
+        var group = getCenterGroup();
+        if (!group) return;
+
+        tabs.forEach(function (tab) {
+          tab.classList.toggle('active', tab.getAttribute('data-group') === group);
+        });
+        document.querySelectorAll('#branchGalleryCaption .gallery-caption-item').forEach(function (cap) {
+          cap.classList.toggle('active', cap.getAttribute('data-group') === group);
         });
 
-        if (closestGroup) {
-          tabs.forEach(function (tab) {
-            tab.classList.remove('active');
-            if (tab.getAttribute('data-group') === closestGroup) {
-              tab.classList.add('active');
-            }
-          });
-          // Update caption
-          var captions = document.querySelectorAll('#branchGalleryCaption .gallery-caption-item');
-          captions.forEach(function (cap) {
-            cap.classList.remove('active');
-            if (cap.getAttribute('data-group') === closestGroup) {
-              cap.classList.add('active');
-            }
-          });
+        if (isMobile()) {
+          if (group !== currentGroup) {
+            currentGroup = group;
+            buildDots(group);
+          }
+          updateDotActive(group);
         }
       }
 
@@ -450,10 +495,24 @@
           var wrapRect = wrap.getBoundingClientRect();
           var targetRect = target.getBoundingClientRect();
           animateTo(wrap, wrap.scrollLeft + (targetRect.left - wrapRect.left), 500);
+          if (isMobile()) {
+            currentGroup = group;
+            buildDots(group);
+          }
         });
       });
 
       wrap.addEventListener('scroll', updateActiveTab);
+
+      if (isMobile()) buildDots('pryroda');
+
+      window.addEventListener('resize', function () {
+        if (isMobile()) {
+          buildDots(currentGroup);
+        } else if (dotsEl) {
+          dotsEl.innerHTML = '';
+        }
+      });
     })();
   </script>
 </body>
