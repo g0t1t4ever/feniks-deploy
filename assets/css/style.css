@@ -3540,6 +3540,7 @@ body.dark-theme .branch-carousel-dot {
     border-radius: 0;
     box-shadow: none;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
     aspect-ratio: 1 / 1;
   }
 
