@@ -426,7 +426,7 @@
               if (!target) return;
               var wrapRect = wrap.getBoundingClientRect();
               var targetRect = target.getBoundingClientRect();
-              animateTo(wrap, wrap.scrollLeft + (targetRect.left - wrapRect.left), 350);
+              wrap.scrollLeft = wrap.scrollLeft + (targetRect.left - wrapRect.left);
             });
           })(i, group);
           dotsEl.appendChild(dot);
