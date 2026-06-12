@@ -866,6 +866,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const allDocAlts   = Array.from(docGalleryImgs).map(el => el.querySelector('img').alt || 'Фото');
 
       // Open modal on image click
+      if (docGalleryWrap.hasAttribute('data-no-modal')) return;
       docGalleryImgs.forEach((el, index) => {
         el.addEventListener('click', (e) => {
           if (isDragging) return;
