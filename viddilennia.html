@@ -494,10 +494,13 @@
           if (!target) return;
           var wrapRect = wrap.getBoundingClientRect();
           var targetRect = target.getBoundingClientRect();
-          animateTo(wrap, wrap.scrollLeft + (targetRect.left - wrapRect.left), 500);
+          var offset = wrap.scrollLeft + (targetRect.left - wrapRect.left);
           if (isMobile()) {
+            wrap.scrollLeft = offset;
             currentGroup = group;
             buildDots(group);
+          } else {
+            animateTo(wrap, offset, 500);
           }
         });
       });
