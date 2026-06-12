@@ -394,15 +394,18 @@
       var dotsEl = document.getElementById('branchCarouselDots');
       if (!wrap || !tabs.length) return;
 
-      var currentGroup = 'pryroda';
+      var allImages = Array.from(wrap.querySelectorAll('.doc-gallery-img'));
+
+      var DOT_STEP = 12;   // 6px dot + 6px gap
+      var TRACK_W  = 70;   // clipping container width
+      var CENTER   = 32;   // TRACK_W/2 - dotSize/2 = 35-3
 
       var easeInOut = function (t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; };
 
-      function animateTo(el, to, duration) {
-        var from = el.scrollLeft;
-        var start = performance.now();
+      function animateTo(el, to, dur) {
+        var from = el.scrollLeft, start = performance.now();
         function step(now) {
-          var p = Math.min((now - start) / duration, 1);
+          var p = Math.min((now - start) / dur, 1);
           el.scrollLeft = from + (to - from) * easeInOut(p);
           if (p < 1) requestAnimationFrame(step);
         }
@@ -411,78 +414,65 @@
 
       function isMobile() { return window.innerWidth <= 768; }
 
-      function buildDots(group) {
-        if (!dotsEl || !isMobile()) return;
-        var images = wrap.querySelectorAll('[data-gallery-group="' + group + '"]');
+      function buildDots() {
+        if (!dotsEl) return;
         dotsEl.innerHTML = '';
-        images.forEach(function (img, i) {
-          var dot = document.createElement('button');
+        var trackWrap = document.createElement('div');
+        trackWrap.className = 'branch-carousel-dots-track';
+        var inner = document.createElement('div');
+        inner.className = 'branch-carousel-dots-inner';
+        allImages.forEach(function (_, i) {
+          var dot = document.createElement('span');
           dot.className = 'branch-carousel-dot' + (i === 0 ? ' active' : '');
-          dot.setAttribute('aria-label', 'Фото ' + (i + 1));
-          (function (idx, grp) {
-            dot.addEventListener('click', function () {
-              var imgs = wrap.querySelectorAll('[data-gallery-group="' + grp + '"]');
-              var target = imgs[idx];
-              if (!target) return;
-              var wrapRect = wrap.getBoundingClientRect();
-              var targetRect = target.getBoundingClientRect();
-              wrap.scrollLeft = wrap.scrollLeft + (targetRect.left - wrapRect.left);
-            });
-          })(i, group);
-          dotsEl.appendChild(dot);
+          inner.appendChild(dot);
         });
+        trackWrap.appendChild(inner);
+        dotsEl.appendChild(trackWrap);
+        syncDots(0);
       }
 
-      function updateDotActive(group) {
-        if (!dotsEl || !isMobile()) return;
-        var images = Array.from(wrap.querySelectorAll('[data-gallery-group="' + group + '"]'));
-        var dots = dotsEl.querySelectorAll('.branch-carousel-dot');
-        var closestIdx = 0;
-        var closestDist = Infinity;
-        var wrapRect = wrap.getBoundingClientRect();
-        images.forEach(function (img, i) {
-          var rect = img.getBoundingClientRect();
-          var dist = Math.abs((rect.left - wrapRect.left + rect.width / 2) - wrap.clientWidth / 2);
-          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
-        });
-        dots.forEach(function (dot, i) {
-          dot.classList.toggle('active', i === closestIdx);
-        });
-      }
-
-      function getCenterGroup() {
-        var images = wrap.querySelectorAll('.doc-gallery-img');
-        var closestGroup = null;
-        var closestDist = Infinity;
-        var wrapRect = wrap.getBoundingClientRect();
-        images.forEach(function (img) {
-          var group = img.getAttribute('data-gallery-group');
-          if (!group) return;
-          var rect = img.getBoundingClientRect();
-          var dist = Math.abs((rect.left - wrapRect.left + rect.width / 2) - wrap.clientWidth / 2);
-          if (dist < closestDist) { closestDist = dist; closestGroup = group; }
-        });
-        return closestGroup;
-      }
-
-      function updateActiveTab() {
-        var group = getCenterGroup();
-        if (!group) return;
-
-        tabs.forEach(function (tab) {
-          tab.classList.toggle('active', tab.getAttribute('data-group') === group);
-        });
-        document.querySelectorAll('#branchGalleryCaption .gallery-caption-item').forEach(function (cap) {
-          cap.classList.toggle('active', cap.getAttribute('data-group') === group);
-        });
-
-        if (isMobile()) {
-          if (group !== currentGroup) {
-            currentGroup = group;
-            buildDots(group);
-          }
-          updateDotActive(group);
+      function syncDots(activeIdx) {
+        if (!dotsEl) return;
+        var inner = dotsEl.querySelector('.branch-carousel-dots-inner');
+        if (!inner) return;
+        var dots = inner.querySelectorAll('.branch-carousel-dot');
+        var total = dots.length;
+        dots.forEach(function (d, i) { d.classList.toggle('active', i === activeIdx); });
+        var naturalW = total * DOT_STEP - 6;
+        var translate;
+        if (naturalW <= TRACK_W) {
+          translate = (TRACK_W - naturalW) / 2;
+        } else {
+          var raw = CENTER - activeIdx * DOT_STEP;
+          var minT = TRACK_W - naturalW;
+          translate = Math.max(minT, Math.min(0, raw));
         }
+        inner.style.transform = 'translateX(' + translate + 'px)';
+      }
+
+      function getActiveIdx() {
+        var best = 0, bestDist = Infinity;
+        var wRect = wrap.getBoundingClientRect();
+        allImages.forEach(function (img, i) {
+          var r = img.getBoundingClientRect();
+          var dist = Math.abs((r.left - wRect.left + r.width / 2) - wrap.clientWidth / 2);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        });
+        return best;
+      }
+
+      function updateUI() {
+        var idx = getActiveIdx();
+        var group = allImages[idx] ? allImages[idx].getAttribute('data-gallery-group') : null;
+        if (group) {
+          tabs.forEach(function (t) {
+            t.classList.toggle('active', t.getAttribute('data-group') === group);
+          });
+          document.querySelectorAll('#branchGalleryCaption .gallery-caption-item').forEach(function (c) {
+            c.classList.toggle('active', c.getAttribute('data-group') === group);
+          });
+        }
+        if (isMobile()) syncDots(idx);
       }
 
       tabs.forEach(function (tab) {
@@ -492,30 +482,21 @@
           var group = tab.getAttribute('data-group');
           var target = wrap.querySelector('[data-gallery-group="' + group + '"]');
           if (!target) return;
-          var wrapRect = wrap.getBoundingClientRect();
-          var targetRect = target.getBoundingClientRect();
-          var offset = wrap.scrollLeft + (targetRect.left - wrapRect.left);
+          var wRect = wrap.getBoundingClientRect();
+          var tRect = target.getBoundingClientRect();
+          var offset = wrap.scrollLeft + (tRect.left - wRect.left);
           if (isMobile()) {
             wrap.scrollLeft = offset;
-            currentGroup = group;
-            buildDots(group);
+            syncDots(getActiveIdx());
           } else {
             animateTo(wrap, offset, 500);
           }
         });
       });
 
-      wrap.addEventListener('scroll', updateActiveTab);
+      wrap.addEventListener('scroll', updateUI);
 
-      if (isMobile()) buildDots('pryroda');
-
-      window.addEventListener('resize', function () {
-        if (isMobile()) {
-          buildDots(currentGroup);
-        } else if (dotsEl) {
-          dotsEl.innerHTML = '';
-        }
-      });
+      buildDots();
     })();
   </script>
 </body>
