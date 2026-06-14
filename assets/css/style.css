@@ -2327,6 +2327,10 @@ body.dark-theme .step-num {
   display: none;
 }
 
+.branches-home-gallery-link {
+  display: none;
+}
+
 .branches-home-dot {
   width: 6px;
   height: 6px;
@@ -2419,6 +2423,18 @@ body.dark-theme .branches-home-dot {
     align-items: center;
     padding: 10px 0 0;
     gap: 6px;
+  }
+
+  .branches-home-gallery-link {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    color: var(--orange-main);
+    font-family: 'TT Norms Pro', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.03em;
   }
 }
 
