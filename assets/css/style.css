@@ -2214,7 +2214,7 @@ body.dark-theme .step-num {
 }
 
 .branches-home-img {
-  flex: 0 0 300px;
+  flex: 0 0 380px;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 10px;
@@ -2234,7 +2234,7 @@ body.dark-theme .step-num {
 }
 
 .branches-home-cta {
-  flex: 0 0 300px;
+  flex: 0 0 380px;
   aspect-ratio: 1 / 1;
   position: relative;
   overflow: hidden;
