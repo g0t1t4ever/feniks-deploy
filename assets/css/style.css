@@ -2327,9 +2327,6 @@ body.dark-theme .step-num {
   display: none;
 }
 
-.branches-home-gallery-link {
-  display: none;
-}
 
 .branches-home-dot {
   width: 6px;
@@ -2404,17 +2401,7 @@ body.dark-theme .branches-home-dot {
   }
 
   .branches-home-cta__label {
-    display: none;
-  }
-
-  .branches-home-cta__label-mobile {
-    display: block;
-    font-family: 'TT Norms Pro', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #fff;
-    text-align: center;
-    letter-spacing: 0.02em;
+    font-size: 1rem;
   }
 
   .branches-home-dots {
@@ -2425,17 +2412,6 @@ body.dark-theme .branches-home-dot {
     gap: 6px;
   }
 
-  .branches-home-gallery-link {
-    display: block;
-    text-align: center;
-    margin-top: 12px;
-    color: var(--orange-main);
-    font-family: 'TT Norms Pro', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    letter-spacing: 0.03em;
-  }
 }
 
 /* ── RELATED SERVICES ───────────────────────── */
