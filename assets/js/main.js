@@ -866,10 +866,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const allDocAlts   = Array.from(docGalleryImgs).map(el => el.querySelector('img').alt || 'Фото');
 
       // Open modal on image click
+      const noModalMobile = docGalleryWrap.hasAttribute('data-no-modal-mobile');
       if (docGalleryWrap.hasAttribute('data-no-modal')) return;
       docGalleryImgs.forEach((el, index) => {
         el.addEventListener('click', (e) => {
           if (isDragging) return;
+          if (noModalMobile && window.innerWidth <= 768) return;
           lastFocusedEl = document.activeElement;
           currentGalleryPhotos = allDocPhotos;
           currentGalleryAlts = allDocAlts;
