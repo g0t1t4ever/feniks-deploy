@@ -479,40 +479,47 @@
         <p class="section-label reveal">Наші відділення</p>
         <h2 class="section-title reveal reveal-delay-1"><em>Чотири центри</em><br>відновлення</h2>
 
-        <!-- Branch photo strip -->
-        <div class="branches-home-strip-wrap reveal reveal-delay-2" id="branchesHomeStrip">
-          <div class="branches-home-strip">
-            <div class="branches-home-img">
-              <img src="assets/images/branch-pryroda-01.jpg" alt="Природа та спорт" loading="lazy" width="360" height="360">
-            </div>
-            <div class="branches-home-img">
-              <img src="assets/images/branch-pryroda-04.jpg" alt="Природне середовище" loading="lazy" width="360" height="360">
-            </div>
-            <div class="branches-home-img">
-              <img src="assets/images/branch-robochyi-01.jpg" alt="Робочий простір" loading="lazy" width="360" height="360">
-            </div>
-            <div class="branches-home-img">
-              <img src="assets/images/branch-pobut-02.jpg" alt="Побут та відпочинок" loading="lazy" width="360" height="360">
-            </div>
-            <a href="viddilennia.html" class="branches-home-cta" aria-label="Переглянути галерею відділень">
-              <div class="branches-home-cta__stack">
-                <div class="bh-peek bh-peek--3"><img src="assets/images/branch-pobut-04.jpg" alt="" loading="lazy" width="360" height="360"></div>
-                <div class="bh-peek bh-peek--2"><img src="assets/images/branch-robochyi-03.jpg" alt="" loading="lazy" width="360" height="360"></div>
-                <div class="bh-peek bh-peek--1"><img src="assets/images/branch-pryroda-07.jpg" alt="" loading="lazy" width="360" height="360"></div>
+        <!-- Branch photo strip + description -->
+        <div class="branches-home-layout">
+          <div class="branches-home-strip-wrap reveal reveal-delay-2" id="branchesHomeStrip">
+            <div class="branches-home-strip">
+              <div class="branches-home-img">
+                <img src="assets/images/branch-pryroda-01.jpg" alt="Природа та спорт" loading="lazy" width="360" height="360">
               </div>
-              <div class="branches-home-cta__overlay">
-                <span class="branches-home-cta__arrow">→</span>
-                <span class="branches-home-cta__label">Вся галерея</span>
-                <span class="branches-home-cta__label-mobile">Дивитись докладніше</span>
+              <div class="branches-home-img">
+                <img src="assets/images/branch-pryroda-04.jpg" alt="Природне середовище" loading="lazy" width="360" height="360">
               </div>
-            </a>
+              <div class="branches-home-img">
+                <img src="assets/images/branch-robochyi-01.jpg" alt="Робочий простір" loading="lazy" width="360" height="360">
+              </div>
+              <div class="branches-home-img">
+                <img src="assets/images/branch-pobut-02.jpg" alt="Побут та відпочинок" loading="lazy" width="360" height="360">
+              </div>
+              <a href="viddilennia.html" class="branches-home-cta" aria-label="Переглянути галерею відділень">
+                <div class="branches-home-cta__stack">
+                  <div class="bh-peek bh-peek--3"><img src="assets/images/branch-pobut-04.jpg" alt="" loading="lazy" width="360" height="360"></div>
+                  <div class="bh-peek bh-peek--2"><img src="assets/images/branch-robochyi-03.jpg" alt="" loading="lazy" width="360" height="360"></div>
+                  <div class="bh-peek bh-peek--1"><img src="assets/images/branch-pryroda-07.jpg" alt="" loading="lazy" width="360" height="360"></div>
+                </div>
+                <div class="branches-home-cta__overlay">
+                  <span class="branches-home-cta__arrow">→</span>
+                  <span class="branches-home-cta__label">Вся галерея</span>
+                  <span class="branches-home-cta__label-mobile">Дивитись докладніше</span>
+                </div>
+              </a>
+            </div>
+            <div class="branches-home-dots" id="branchesHomeDots"></div>
           </div>
-          <div class="branches-home-dots" id="branchesHomeDots"></div>
+          <div class="branches-home-desc reveal reveal-delay-3">
+            <p class="section-desc">
+              Харків, Чугуїв та Вінниця — кожне відділення є безпечним простором для відновлення з повним побутовим забезпеченням і рекреаційною зоною.
+            </p>
+            <p class="section-desc">
+              Організовуємо безпечне перевезення з будь-якого регіону України — логістика та супровід повністю на нас.
+            </p>
+            <a href="viddilennia.html" class="program-more-btn" style="align-self:flex-start;">Детальніше про відділення</a>
+          </div>
         </div>
-        <p class="section-desc reveal reveal-delay-3" style="margin-top: 20px; max-width: 680px;">
-          Харків, Чугуїв та Вінниця — кожне відділення є безпечним простором для відновлення з повним побутовим забезпеченням і рекреаційною зоною.
-          Організовуємо перевезення з будь-якого регіону України. <a href="viddilennia.html" style="color:var(--orange-main);white-space:nowrap;">Детальніше →</a>
-        </p>
 
 
       </div>
@@ -623,9 +630,39 @@
   <script>
     (function () {
       var wrap = document.getElementById('branchesHomeStrip');
+      if (!wrap) return;
+      var strip = wrap.querySelector('.branches-home-strip');
       var dotsEl = document.getElementById('branchesHomeDots');
-      if (!wrap || !dotsEl || window.innerWidth > 768) return;
-      var items = Array.from(wrap.querySelector('.branches-home-strip').children);
+      var isMobile = window.innerWidth <= 768;
+
+      // Desktop: drag-to-scroll
+      if (!isMobile) {
+        var isDragging = false, startX = 0, scrollStart = 0;
+        wrap.addEventListener('mousedown', function (e) {
+          isDragging = true;
+          startX = e.pageX - wrap.offsetLeft;
+          scrollStart = wrap.scrollLeft;
+          wrap.style.cursor = 'grabbing';
+        });
+        window.addEventListener('mouseup', function () {
+          isDragging = false;
+          wrap.style.cursor = 'grab';
+        });
+        wrap.addEventListener('mousemove', function (e) {
+          if (!isDragging) return;
+          e.preventDefault();
+          wrap.scrollLeft = scrollStart - (e.pageX - wrap.offsetLeft - startX);
+        });
+        wrap.addEventListener('wheel', function (e) {
+          e.preventDefault();
+          wrap.scrollLeft += e.deltaX || e.deltaY;
+        }, { passive: false });
+        return;
+      }
+
+      // Mobile: dots
+      if (!dotsEl || !strip) return;
+      var items = Array.from(strip.children);
       items.forEach(function () {
         var dot = document.createElement('span');
         dot.className = 'branches-home-dot';
