@@ -2295,11 +2295,12 @@ body.dark-theme .branches-home-dot {
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    scroll-padding-left: 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    margin-left: -20px;
-    margin-right: -20px;
+    -ms-overflow-style: none;
+    margin-left: calc(-1 * clamp(24px, 6vw, 48px));
+    margin-right: calc(-1 * clamp(24px, 6vw, 48px));
+    border-radius: 0;
   }
 
   .branches-home-strip-wrap::-webkit-scrollbar {
@@ -2307,16 +2308,27 @@ body.dark-theme .branches-home-dot {
   }
 
   .branches-home-strip {
-    padding: 0 20px;
-    gap: 12px;
+    padding: 0;
+    gap: 0;
   }
 
   .branches-home-img,
   .branches-home-cta {
-    flex: 0 0 calc(100vw - 60px);
+    flex: 0 0 100vw;
+    min-width: 100vw;
     scroll-snap-align: start;
-    aspect-ratio: 4 / 3;
-    border-radius: 10px;
+    scroll-snap-stop: always;
+    aspect-ratio: 1 / 1;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .branches-home-img:hover img {
+    transform: none;
+  }
+
+  .branches-home-cta {
+    border-radius: 0;
   }
 
   .branches-home-cta__label {
@@ -2326,7 +2338,7 @@ body.dark-theme .branches-home-dot {
   .branches-home-cta__label-mobile {
     display: block;
     font-family: 'TT Norms Pro', sans-serif;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: #fff;
     text-align: center;
