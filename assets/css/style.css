@@ -2147,6 +2147,201 @@ body.dark-theme .step-num {
   }
 }
 
+/* ── BRANCHES HOME PHOTO STRIP ───────────────── */
+.branches-home-strip-wrap {
+  margin-top: 32px;
+}
+
+.branches-home-strip {
+  display: flex;
+  gap: 10px;
+}
+
+.branches-home-img {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--bg-card);
+}
+
+.branches-home-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.branches-home-img:hover img {
+  transform: scale(1.05);
+}
+
+.branches-home-cta {
+  flex: 1;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  background: #111;
+}
+
+.branches-home-cta__stack {
+  position: absolute;
+  inset: 0;
+}
+
+.bh-peek {
+  position: absolute;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.bh-peek img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bh-peek--1 {
+  top: 12%; left: 12%; width: 76%; height: 76%;
+  opacity: 0.7;
+  transform: rotate(-1deg);
+  z-index: 3;
+}
+
+.bh-peek--2 {
+  top: 6%; left: 6%; width: 82%; height: 82%;
+  opacity: 0.4;
+  transform: rotate(-4deg);
+  z-index: 2;
+}
+
+.bh-peek--3 {
+  top: 2%; left: 2%; width: 88%; height: 88%;
+  opacity: 0.2;
+  transform: rotate(-7deg);
+  z-index: 1;
+}
+
+.branches-home-cta__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.38);
+  transition: background 0.3s ease;
+  padding: 12px;
+}
+
+.branches-home-cta:hover .branches-home-cta__overlay {
+  background: rgba(0, 0, 0, 0.54);
+}
+
+.branches-home-cta__arrow {
+  font-size: 2rem;
+  color: #fff;
+  line-height: 1;
+  display: block;
+}
+
+.branches-home-cta__label {
+  font-family: 'TT Norms Pro', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.02em;
+  display: block;
+}
+
+.branches-home-cta__label-mobile {
+  display: none;
+}
+
+.branches-home-dots {
+  display: none;
+}
+
+.branches-home-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  transition: width 0.2s ease, border-radius 0.2s ease, background 0.2s ease;
+}
+
+body.dark-theme .branches-home-dot {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.branches-home-dot.active {
+  width: 18px;
+  border-radius: 3px;
+  background: var(--orange-main);
+}
+
+@media (max-width: 768px) {
+  .branches-home-strip-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+
+  .branches-home-strip-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .branches-home-strip {
+    padding: 0 20px;
+    gap: 12px;
+  }
+
+  .branches-home-img,
+  .branches-home-cta {
+    flex: 0 0 calc(100vw - 60px);
+    scroll-snap-align: start;
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+  }
+
+  .branches-home-cta__label {
+    display: none;
+  }
+
+  .branches-home-cta__label-mobile {
+    display: block;
+    font-family: 'TT Norms Pro', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .branches-home-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 0;
+    gap: 6px;
+  }
+}
+
 /* ── RELATED SERVICES ───────────────────────── */
 .related-services {
   display: grid;
