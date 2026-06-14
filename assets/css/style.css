@@ -2352,7 +2352,8 @@ body.dark-theme .branches-home-dot {
   }
 
   .branches-home-desc {
-    display: none;
+    margin-top: 20px;
+    padding: 0 clamp(24px, 6vw, 48px);
   }
 
   .branches-home-strip-col {
@@ -2361,6 +2362,7 @@ body.dark-theme .branches-home-dot {
   }
 
   .branches-home-strip-wrap {
+    display: flex;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -2375,19 +2377,18 @@ body.dark-theme .branches-home-dot {
   }
 
   .branches-home-strip {
-    padding: 0;
-    gap: 0;
+    display: contents;
   }
 
   .branches-home-img,
   .branches-home-cta {
-    flex: 0 0 100vw;
-    min-width: 100vw;
+    flex: 0 0 100%;
     scroll-snap-align: start;
     scroll-snap-stop: always;
     aspect-ratio: 1 / 1;
     border-radius: 0;
     box-shadow: none;
+    min-width: 0;
   }
 
   .branches-home-img:hover img {
@@ -3791,6 +3792,7 @@ body.dark-theme .branch-carousel-dot {
   }
 
   #branchStripWrap {
+    display: flex;
     margin-left: calc(-1 * clamp(24px, 6vw, 48px));
     margin-right: calc(-1 * clamp(24px, 6vw, 48px));
     border-radius: 0;
@@ -3804,13 +3806,12 @@ body.dark-theme .branch-carousel-dot {
   }
 
   #branchStripWrap .doc-gallery-strip {
-    gap: 0;
-    padding: 0;
+    display: contents;
   }
 
   #branchStripWrap .doc-gallery-img {
-    flex: 0 0 100vw;
-    min-width: 100vw;
+    flex: 0 0 100%;
+    min-width: 0;
     border-radius: 0;
     box-shadow: none;
     scroll-snap-align: start;
