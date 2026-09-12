@@ -5,6 +5,34 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── CONVERSION EVENTS ──────────────────────
+  // Never send form values or other personal data to analytics.
+  window.dataLayer = window.dataLayer || [];
+
+  function trackEvent(eventName, parameters = {}) {
+    window.dataLayer.push({ event: eventName, ...parameters });
+  }
+
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href]');
+    if (!link) return;
+
+    const href = link.getAttribute('href') || '';
+    let contactMethod = '';
+
+    if (href.startsWith('tel:')) contactMethod = 'phone';
+    else if (href.startsWith('https://t.me/')) contactMethod = 'telegram';
+    else if (href.startsWith('https://www.instagram.com/')) contactMethod = 'instagram';
+    else if (href.startsWith('https://www.facebook.com/')) contactMethod = 'facebook';
+
+    if (contactMethod) {
+      trackEvent('contact_click', {
+        contact_method: contactMethod,
+        page_path: window.location.pathname,
+      });
+    }
+  });
+
   // ── THEME TOGGLE ────────────────────────────
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
@@ -520,6 +548,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         await sendContactForm(nameVal, phoneVal, cityVal, messageVal);
+        trackEvent('generate_lead', {
+          contact_method: 'contact_form',
+          page_path: window.location.pathname,
+        });
         setBtn('✓ Заявку прийнято! Ми зателефонуємо', 'success', true);
         nameInput.value = '';
         phoneInput.value = '';
