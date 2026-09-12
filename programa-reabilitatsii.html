@@ -6,6 +6,7 @@
   <title>Програма реабілітації при залежності: 4 етапи | Фенікс</title>
   <meta name="description" content="Програма реабілітації при алкогольній, наркотичній та ігровій залежності у «Феніксі»: 4 етапи, підтримка родини, від 1 місяця до 1 року.">
   <link rel="canonical" href="https://www.phoenyx.com.ua/programa-reabilitatsii.html">
+  <link rel="preload" as="image" href="assets/images/programa-bg.jpg" fetchpriority="high">
   <link rel="icon" type="image/png" href="assets/images/logo.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" media="print" onload="this.media='all'">
@@ -141,7 +142,7 @@
         <div class="intro-grid reveal reveal-delay-2">
           <div>
             <p class="section-desc" style="margin-top:0;">Перший етап залежить від виду залежності та поточного стану. Команда збирає інформацію про фізичний і психологічний стан, визначає потреби клієнта та планує наступні кроки.</p>
-            <p class="section-desc">Якщо потрібен <a href="detoks.html" style="color:var(--orange-main);">стаціонарний детокс</a>, при надходженні нарколог оцінює стан, призначає індивідуальну медикаментозну підтримку та залишається на зв'язку. Крапельницю проводять лише за його призначенням; умови й додаткову вартість окремо погоджують із родиною.</p>
+            <p class="section-desc">Якщо потрібен <a href="detoks.html">стаціонарний детокс</a>, при надходженні нарколог оцінює стан, призначає індивідуальну медикаментозну підтримку та залишається на зв'язку. Крапельницю проводять лише за його призначенням; умови й додаткову вартість окремо погоджують із родиною.</p>
             <p class="section-desc">Після стабілізації клієнт адаптується до структурованого розпорядку, проживання та харчування у тренінг центрі й переходить до психологічної роботи.</p>
           </div>
           <div>
@@ -168,7 +169,7 @@
       <div class="intro-grid reveal reveal-delay-2">
         <div>
           <p class="section-desc" style="margin-top:0;">Основний етап програми поєднує індивідуальну роботу з психологом і групові сесії. Завдання — визначити чинники, що підтримують залежність, опрацювати їх і сформувати нові моделі поведінки.</p>
-          <p class="section-desc"><a href="pro-nas.html#specialists" style="color:var(--orange-main);">Команда фахівців</a> застосовує когнітивно-поведінкову й гештальт-терапію, транзакційний аналіз, арт-терапію та ігротерапію. Програма «12 кроків» є основою групової роботи.</p>
+          <p class="section-desc"><a href="pro-nas.html#specialists">Команда фахівців</a> застосовує когнітивно-поведінкову й гештальт-терапію, транзакційний аналіз, арт-терапію та ігротерапію. Програма «12 кроків» є основою групової роботи.</p>
           <p class="section-desc">Паралельно працюємо з родиною: допомагаємо близьким зрозуміти свою роль у відновленні, підтримувати учасника програми та зберігати власні межі.</p>
           <p class="section-desc">Фізична активність, побутові завдання та участь у житті спільноти допомагають формувати дисципліну й навички саморегуляції.</p>
         </div>
@@ -298,13 +299,13 @@
       <h2 class="section-title reveal reveal-delay-1">Активність <em>спільноти</em></h2>
       <p class="section-desc reveal reveal-delay-2" style="max-width:640px;margin-bottom:32px;">Обирайте напрямок — і переглядайте реальні знімки з життя спільноти. Натисніть на фото, щоб відкрити у повному розмірі.</p>
 
-      <div class="activity-tabs reveal reveal-delay-2" id="activityTabs">
-        <button class="activity-tab active" data-tab="sport">Спорт і відпочинок</button>
-        <button class="activity-tab" data-tab="psycho">Психотерапія</button>
-        <button class="activity-tab" data-tab="group">Групова терапія</button>
-        <button class="activity-tab" data-tab="social">Соціальна активність</button>
-        <button class="activity-tab" data-tab="serving">Допомога іншим</button>
-        <button class="activity-tab" data-tab="growth">Освіта та зростання</button>
+      <div class="activity-tabs reveal reveal-delay-2" id="activityTabs" role="group" aria-label="Категорії фотографій активностей">
+        <button type="button" class="activity-tab active" data-tab="sport" id="tab-sport" aria-pressed="true">Спорт і відпочинок</button>
+        <button type="button" class="activity-tab" data-tab="psycho" id="tab-psycho" aria-pressed="false">Психотерапія</button>
+        <button type="button" class="activity-tab" data-tab="group" id="tab-group" aria-pressed="false">Групова терапія</button>
+        <button type="button" class="activity-tab" data-tab="social" id="tab-social" aria-pressed="false">Соціальна активність</button>
+        <button type="button" class="activity-tab" data-tab="serving" id="tab-serving" aria-pressed="false">Допомога іншим</button>
+        <button type="button" class="activity-tab" data-tab="growth" id="tab-growth" aria-pressed="false">Освіта та зростання</button>
       </div>
 
       <div class="activity-panel active" data-panel="sport">

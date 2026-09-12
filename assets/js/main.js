@@ -940,7 +940,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function activateActivityTab(tab) {
     if (!activityTabsEl) return;
-    activityTabsEl.querySelectorAll('.activity-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    activityTabsEl.querySelectorAll('.activity-tab').forEach(t => {
+      const isActive = t.dataset.tab === tab;
+      t.classList.toggle('active', isActive);
+      t.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
     document.querySelectorAll('.activity-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === tab));
   }
 

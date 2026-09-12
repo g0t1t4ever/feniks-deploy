@@ -1122,6 +1122,26 @@ body.dark-theme .section-desc {
   max-width: 600px;
 }
 
+.section-desc a {
+  color: var(--orange-main);
+  font-weight: 600;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color 0.2s ease, text-decoration-thickness 0.2s ease;
+}
+
+.section-desc a:hover {
+  color: var(--orange-hover);
+  text-decoration-thickness: 2px;
+}
+
+.section-desc a:focus-visible {
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 3px var(--overlay-orange-soft);
+}
+
 .section-desc + .section-desc { margin-top: 16px; }
 
 .section-more-row {
