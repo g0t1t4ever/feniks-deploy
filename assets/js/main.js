@@ -31,7 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
   cookieBanner.querySelector('.cookie-banner__accept').addEventListener('click', () => { updateAnalyticsConsent('granted'); hideCookieBanner(); });
   cookieBanner.querySelector('.cookie-banner__reject').addEventListener('click', () => { updateAnalyticsConsent('denied'); hideCookieBanner(); });
   document.querySelector('.cookie-settings')?.addEventListener('click', showCookieBanner);
-  if (savedConsent === null) showCookieBanner();
+  if (savedConsent === 'granted' || savedConsent === 'denied') {
+    updateAnalyticsConsent(savedConsent);
+  } else {
+    showCookieBanner();
+  }
 
   // ── CONVERSION EVENTS ──────────────────────
   // Never send form values or other personal data to analytics.
