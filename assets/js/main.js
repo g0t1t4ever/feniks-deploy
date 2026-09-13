@@ -4,6 +4,34 @@
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // ── ANALYTICS CONSENT ──────────────────────
+  const consentKey = 'feniks_analytics_consent';
+  const savedConsent = localStorage.getItem(consentKey);
+  function updateAnalyticsConsent(value) {
+    localStorage.setItem(consentKey, value);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'consent_update', analytics_storage: value });
+    if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: value, ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+  }
+  const footer = document.querySelector('footer');
+  if (footer) {
+    const privacyNav = document.createElement('div');
+    privacyNav.className = 'footer-privacy';
+    privacyNav.innerHTML = '<a href="privacy.html">Політика конфіденційності</a><button type="button" class="cookie-settings">Налаштування cookies</button>';
+    footer.appendChild(privacyNav);
+  }
+  const cookieBanner = document.createElement('section');
+  cookieBanner.className = 'cookie-banner';
+  cookieBanner.setAttribute('aria-label', 'Налаштування аналітичних cookies');
+  cookieBanner.setAttribute('role', 'dialog');
+  cookieBanner.innerHTML = `<div class="cookie-banner__content"><p><strong>Аналітичні cookies</strong></p><p>Допомагають нам зрозуміти, як відвідувачі користуються сайтом. Ми не передаємо Google дані з форми заявки. <a href="privacy.html">Докладніше</a></p></div><div class="cookie-banner__actions"><button type="button" class="cookie-banner__reject">Відхилити</button><button type="button" class="cookie-banner__accept">Дозволити</button></div>`;
+  document.body.appendChild(cookieBanner);
+  function showCookieBanner() { cookieBanner.classList.add('is-visible'); cookieBanner.setAttribute('aria-hidden', 'false'); }
+  function hideCookieBanner() { cookieBanner.classList.remove('is-visible'); cookieBanner.setAttribute('aria-hidden', 'true'); }
+  cookieBanner.querySelector('.cookie-banner__accept').addEventListener('click', () => { updateAnalyticsConsent('granted'); hideCookieBanner(); });
+  cookieBanner.querySelector('.cookie-banner__reject').addEventListener('click', () => { updateAnalyticsConsent('denied'); hideCookieBanner(); });
+  document.querySelector('.cookie-settings')?.addEventListener('click', showCookieBanner);
+  if (savedConsent === null) showCookieBanner();
 
   // ── CONVERSION EVENTS ──────────────────────
   // Never send form values or other personal data to analytics.

@@ -4382,3 +4382,26 @@ body.dark-theme .activity-panel-desc {
   color: #BBBBBB;
 }
 .service-card[data-activity] { cursor: pointer; }
+
+/* ── PRIVACY & COOKIE CONSENT ───────────────── */
+.footer-privacy { display:flex; flex-direction:column; align-items:center; gap:6px; font-size:.82rem; }
+.footer-privacy a,.cookie-settings { color:var(--text-secondary); text-decoration:underline; text-underline-offset:3px; }
+.cookie-settings { border:0; padding:0; background:transparent; font:inherit; cursor:pointer; }
+.footer-privacy a:hover,.cookie-settings:hover { color:var(--orange-main); }
+.footer-privacy a:focus-visible,.cookie-settings:focus-visible,.cookie-banner button:focus-visible,.cookie-banner a:focus-visible { outline:2px solid var(--orange-main); outline-offset:3px; }
+.cookie-banner { position:fixed; z-index:2000; right:clamp(16px,3vw,40px); bottom:clamp(16px,3vw,40px); left:clamp(16px,3vw,40px); display:none; max-width:760px; margin-left:auto; padding:20px; gap:20px; align-items:center; justify-content:space-between; border:1px solid var(--color-subtle-border); border-radius:14px; background:var(--bg-card); color:var(--text-primary); box-shadow:0 14px 50px rgba(0,0,0,.22); }
+.cookie-banner.is-visible { display:flex; }
+.cookie-banner__content { max-width:520px; }
+.cookie-banner__content p { margin:0; line-height:1.5; }
+.cookie-banner__content p+p { margin-top:5px; color:var(--text-secondary); }
+.cookie-banner__content a { color:var(--orange-main); font-weight:600; }
+.cookie-banner__actions { display:flex; gap:10px; flex-shrink:0; }
+.cookie-banner__actions button { min-height:42px; padding:9px 16px; border:2px solid var(--orange-main); border-radius:8px; font-family:'TT Norms Pro',sans-serif; font-weight:700; cursor:pointer; }
+.cookie-banner__reject { background:transparent; color:var(--orange-main); }
+.cookie-banner__accept { background:var(--orange-main); color:var(--text-on-brand); }
+.privacy-page { padding-top:112px; }
+.privacy-content { max-width:880px; }
+.privacy-content h2 { margin:42px 0 12px; color:var(--text-primary); }
+.privacy-content p,.privacy-content li { color:var(--text-secondary); line-height:1.75; }
+.privacy-content a { color:var(--orange-main); font-weight:600; }
+@media (max-width:768px) { .cookie-banner { align-items:stretch; flex-direction:column; } .cookie-banner__actions button { flex:1; } .privacy-page { padding-top:96px; } }
