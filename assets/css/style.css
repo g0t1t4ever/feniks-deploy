@@ -2442,6 +2442,10 @@ body.dark-theme .branches-home-dot {
   margin-top: 32px;
 }
 
+.related-services--two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .related-service-card {
   display: flex;
   flex-direction: column;
@@ -2457,6 +2461,11 @@ body.dark-theme .branches-home-dot {
 .related-service-card:hover {
   border-color: var(--orange-main);
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.related-service-card:focus-visible {
+  border-color: var(--orange-main);
+  box-shadow: 0 0 0 3px var(--overlay-orange-soft);
 }
 
 .related-service-card__title {
